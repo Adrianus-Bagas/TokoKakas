@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Keranjang</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark"
+		style="background-color: green;">
+		<a class="navbar-brand"
+			th:href="@{/user/{user_name} (user_name=${user.user_name})}">TokoKakas</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarText" aria-controls="navbarText"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarText">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/user/{user_name} (user_name=${user.user_name})}">Beranda
+				</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/keranjang/{user_name} (user_name=${user.user_name})}">Keranjang</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/riwayat/{user_name} (user_name=${user.user_name})}">Riwayat</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/user/kakas-pay/{user_name}(user_name=${user.user_name})}"
+					th:text="|Kakas Pay : Rp ${user.kakas_pay}|"></a></li>
+			</ul>
+			<span class="navbar-text"><a th:text="${user.user_name}"
+				th:href="@{/user/edit/{user_name}(user_name=${user.user_name})}"></a>
+			</span>
+		</div>
+	</nav>
+	<br>
+	<div class="container">
+		<div class="d-flex justify-content-center">
+			<h1>Keranjang</h1>
+		</div>
+		<br>
+		<br>
+		<form class="d-flex flex-row"
+			th:action="@{/keranjang/{user_name} (user_name=${user.user_name})}"
+			th:object="${pesanan}" th:method="POST">
+			<div class="form-group d-flex align-items-center mx-3">
+				<h4>Keranjang Baru</h4>
+			</div>
+			<div class="form-group">
+				<input type="text" th:name="nama_pesanan"
+					th:id="nama_pesanan" class="form-control"
+					placeholder="Nama Keranjang" />
+			</div>
+			<div class="box-footer mx-3">
+				<button type="submit" class="btn btn-primary">Tambah Keranjang</button>
+			</div>
+		</form>
+		<div class="row">
+			<div th:each="psn: ${pesanan}" class="col-sm-4">
+				<div class="col-mb-4">
+					<div class="card border-success my-3" style="width: 20rem;">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${psn.nama_pesanan}"></h5>
+							<p class="card-text"
+								th:text="|Tanggal Dibuat : ${psn.tanggal_dibuat}|"></p>
+							<p class="card-text" th:text="|Total Harga : Rp ${psn.biaya}|"></p>
+							<div
+								class="card-footer bg-transparent border-success d-flex justify-content-center">
+								<a th:href="@{|/keranjang/${psn.user_name}/${psn.id_pesanan}|}"
+									class="btn btn-warning mx-3">Detail</a> <a
+									th:href="@{|/keranjang/tambah-barang/${psn.user_name}/${psn.id_pesanan}|}"
+									class="btn btn-primary">Tambah Barang</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>
