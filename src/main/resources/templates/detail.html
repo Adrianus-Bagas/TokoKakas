@@ -90,13 +90,13 @@
 								th:action="@{|/keranjang/${user.user_name}/${pesanan.id_pesanan}|}"
 								th:object="${detail}" th:method="DELETE">
 								<input type="hidden" name="_method" value="delete"> <input
-									type="text" th:name="id_detail" th:id="id_detail"
+									type="hidden" th:name="id_detail" th:id="id_detail"
 									class="form-control" th:value=${detail.id_detail} />
 								<input
-									type="text" th:name="nama_barang" th:id="nama_barang"
+									type="hidden" th:name="nama_barang" th:id="nama_barang"
 									class="form-control" th:value=${detail.nama_barang} />
 								<input
-									type="text" th:name="jumlah" th:id="jumlah"
+									type="hidden" th:name="jumlah" th:id="jumlah"
 									class="form-control" th:value=${detail.jumlah} />
 								<div class="box-footer">
 									<button type="submit" class="btn btn-danger">Hapus
@@ -111,23 +111,3 @@
 	</div>
 </body>
 </html>
-<!-- <table class="table table-striped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>Nama Barang</th>
-					<th>Jumlah</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<tr th:each="detail: ${detail}">
-					<td th:text="${detail.nama_barang}"></td>
-					<td th:text="${detail.jumlah}"></td>
-					<td>
-						<a href="#" class="btn btn-primary">Edit</a>
-					</td>
-				</tr>
-			</tbody>
-
-		</table> -->
